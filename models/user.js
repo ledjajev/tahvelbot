@@ -21,13 +21,6 @@ export default (sequelize) =>
             onDelete: "CASCADE",
         },
         groupId: {
-            type: DataTypes.STRING,
-            allowNull: true,
-            references: {
-              model: "Groups", // must match your Institution table name
-              key: "studentGroupUuid",
-            },
-            onUpdate: "CASCADE",
-            onDelete: "CASCADE",
+            type: DataTypes.STRING
         },
     });
