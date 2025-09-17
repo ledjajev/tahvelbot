@@ -74,8 +74,12 @@ bot.hears(/🏫 (.+) \| 👥 (.+)/, async (ctx) => {
     return ctx.reply(text, { parse_mode: "Markdown" });
 });
 
+import { format, utcToZonedTime } from "date-fns-tz";
+
+const ESTONIA_TZ = "Europe/Tallinn";
+
 function formatEstonianDate(date) {
-    return format(date, "yyyy-MM-dd", { timeZone: "Europe/Tallinn" });
+    return format(utcToZonedTime(date, ESTONIA_TZ), "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
 }
 
 
