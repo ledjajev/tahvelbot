@@ -1,0 +1,30 @@
+{
+  "name": "tahvelbot",
+  "version": "1.0.0",
+  "description": "A Telegram bot for interacting with tahvel.edu.ee",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --ignore ./data/ index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ledjajev/tahvelbot.git"
+  },
+  "homepage": "https://t.me/tahvelbot",
+  "author": "Roman Ledjajev",
+  "license": "ISC",
+  "keywords": [],
+  "dependencies": {
+    "date-fns": "^4.1.0",
+    "dotenv": "^17.2.2",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7",
+    "telegraf": "^4.16.3",
+    "telegraf-session-local": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

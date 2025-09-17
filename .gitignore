@@ -1,0 +1,7 @@
+/node_modules
+.env
+
+# Ignore everything in the data folder
+/data/*
+# Except for the .keep file
+!/data/.keep
