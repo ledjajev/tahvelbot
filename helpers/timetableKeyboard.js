@@ -1,3 +1,12 @@
+import { format } from "date-fns-tz";
+
+/**
+ * Format a date as YYYY-MM-DD in Estonian time
+ */
+function formatEstonianDate(date) {
+    return format(date, "yyyy-MM-dd", { timeZone: "Europe/Tallinn" });
+}
+
 /**
  * Build inline keyboard for timetable days in a week
  *
@@ -13,10 +22,11 @@ export function buildTimetableDaysKeyboard(monday, sunday, grouped, todayStr) {
         weekday: "short", // Mon, Tue
         day: "numeric",   // 17
         month: "short",   // Sep
+        timeZone: "Europe/Tallinn", // 👈 important
     });
 
     for (let d = new Date(monday); d <= sunday; d.setDate(d.getDate() + 1)) {
-        const ds = d.toISOString().split("T")[0];
+        const ds = formatEstonianDate(d); // ✅ proper Estonian date string
         const count = grouped[ds] ? grouped[ds].length : 0;
 
         let label = `${dayFormatter.format(d)} (${count})`;
