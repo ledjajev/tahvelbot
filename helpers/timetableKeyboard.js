@@ -30,9 +30,9 @@ export function buildTimetableDaysKeyboard(monday, sunday, grouped, todayStr) {
         const count = grouped[ds] ? grouped[ds].length : 0;
 
         let label = `${dayFormatter.format(zoned)} (${count})`;
-        if (ds === todayStr) {
+       /*if (ds === todayStr) {
             label = `👉 ${label} 👈`;
-        }
+        } not today*/ n
 
         days.push([{ text: label, callback_data: `timetable_day_${ds}` }]);
 
