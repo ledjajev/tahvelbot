@@ -74,6 +74,10 @@ bot.hears(/🏫 (.+) \| 👥 (.+)/, async (ctx) => {
     return ctx.reply(text, { parse_mode: "Markdown" });
 });
 
+function formatEstonianDate(date) {
+    return format(date, "yyyy-MM-dd", { timeZone: "Europe/Tallinn" });
+}
+
 
 // Listener for 📅 Today
 bot.hears("📅 Today", async (ctx) => {
@@ -84,7 +88,7 @@ bot.hears("📅 Today", async (ctx) => {
     }
 
     const today = new Date();
-    const ds = today.toISOString().split("T")[0];
+    const ds = formatEstonianDate(today);
     return handleTimetableForDate(ctx, user, ds);
 });
 
@@ -98,7 +102,7 @@ bot.hears("📅 Tomorrow", async (ctx) => {
 
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const ds = tomorrow.toISOString().split("T")[0];
+    const ds = formatEstonianDate(tomorrow);
     return handleTimetableForDate(ctx, user, ds);
 });
 

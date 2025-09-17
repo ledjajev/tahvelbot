@@ -18,6 +18,7 @@
   "keywords": [],
   "dependencies": {
     "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "dotenv": "^17.2.2",
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7",
