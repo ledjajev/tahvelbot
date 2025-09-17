@@ -1,40 +1,43 @@
-
-import { format, toZonedTime } from "date-fns-tz";
+import { format } from "date-fns-tz";
 
 const ESTONIA_TZ = "Europe/Tallinn";
 
-function formatEstonianDate(date) {
-    return format(toZonedTime(date, ESTONIA_TZ), "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
-}
 
 /**
  * Build inline keyboard for timetable days in a week
  *
- * @param {Date} monday - Monday of the week
- * @param {Date} sunday - Sunday of the week
+ * @param {Date} monday - Monday of the week (UTC date)
+ * @param {Date} sunday - Sunday of the week (UTC date)
  * @param {Object} grouped - Events grouped by date { "YYYY-MM-DD": [events] }
- * @param {string} todayStr - Today's date in YYYY-MM-DD
+ * @param {string} todayStr - Today's date in YYYY-MM-DD (Estonian time)
  * @returns {Array} Inline keyboard structure
  */
 export function buildTimetableDaysKeyboard(monday, sunday, grouped, todayStr) {
     const days = [];
     const dayFormatter = new Intl.DateTimeFormat("en-GB", {
-        weekday: "short", // Mon, Tue
-        day: "numeric",   // 17
-        month: "short",   // Sep
-        timeZone: "Europe/Tallinn", // 👈 important
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+        timeZone: ESTONIA_TZ, // ✅ ensure labels use Estonian time
     });
 
-    for (let d = new Date(monday); d <= sunday; d.setDate(d.getDate() + 1)) {
-        const ds = formatEstonianDate(d); // ✅ proper Estonian date string
+    // clone the monday date so we don’t mutate input
+    let current = new Date(monday);
+
+    while (current <= sunday) {
+        const zoned = toZonedTime(current, ESTONIA_TZ);
+        const ds = format(zoned, "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
         const count = grouped[ds] ? grouped[ds].length : 0;
 
-        let label = `${dayFormatter.format(d)} (${count})`;
+        let label = `${dayFormatter.format(zoned)} (${count})`;
         if (ds === todayStr) {
-            label = `👉 ${label} 👈`; // highlight today
+            label = `👉 ${label} 👈`;
         }
 
         days.push([{ text: label, callback_data: `timetable_day_${ds}` }]);
+
+        // move to next day
+        current.setDate(current.getDate() + 1);
     }
 
     return days;
