@@ -32,7 +32,7 @@ export async function showTimetableDays(ctx) {
     }
 
     // ✅ build inline keyboard
-    const days = buildTimetableDaysKeyboard(monday, sunday, grouped, todayStr);
+    const days = buildTimetableDaysKeyboard(grouped, todayStr);
 
     return ctx.reply("📅 Select a day:", {
         reply_markup: { inline_keyboard: days },
