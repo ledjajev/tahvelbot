@@ -10,11 +10,10 @@ import { userMiddleware, rateLimitMiddleware, syncGuardMiddleware } from "./midd
 
 // services
 import { syncAll } from "./services/syncAll.js";
-import { fetchTimetableForWeek, handleTimetableForDate } from "./services/timetable.js";
+import { handleTimetableForDate } from "./services/timetable.js";
 
 // helpers
 import { paginateItems } from "./helpers/pagination.js";
-import { buildTimetableDaysKeyboard } from "./helpers/timetableKeyboard.js";
 import { handleCallbackQuery } from "./controllers/callbacks.js";
 import { showTimetableDays } from "./controllers/timetable.js";
 
