@@ -1,10 +1,10 @@
 
-import { format, utcToZonedTime } from "date-fns-tz";
+import { format, toZonedTime } from "date-fns-tz";
 
 const ESTONIA_TZ = "Europe/Tallinn";
 
 function formatEstonianDate(date) {
-    return format(utcToZonedTime(date, ESTONIA_TZ), "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
+    return format(toZonedTime(date, ESTONIA_TZ), "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
 }
 
 /**

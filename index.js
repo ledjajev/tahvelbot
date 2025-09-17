@@ -3,7 +3,7 @@ import { BOT_TOKEN } from "./config.js";
 import { Telegraf } from "telegraf";
 import { sequelize, Institution, Group, User } from "./models/index.js";
 import LocalSession from "telegraf-session-local";
-import { format, utcToZonedTime } from "date-fns-tz";
+import { format, toZonedTime } from "date-fns-tz";
 
 const ESTONIA_TZ = "Europe/Tallinn";
 
@@ -78,7 +78,7 @@ bot.hears(/🏫 (.+) \| 👥 (.+)/, async (ctx) => {
 
 
 function formatEstonianDate(date) {
-    return format(utcToZonedTime(date, ESTONIA_TZ), "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
+    return format(toZonedTime(date, ESTONIA_TZ), "yyyy-MM-dd", { timeZone: ESTONIA_TZ });
 }
 
 
