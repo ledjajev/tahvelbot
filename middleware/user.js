@@ -11,11 +11,7 @@ export const userMiddleware = async (ctx, next) => {
     defaults: { username },
   });
 
-  if (created) {
-    return ctx.reply("Welcome, new user!");
-  }
-
-  // Keep username updated if changed
+  // Keep username updated if changed (for both new and existing users)
   if (user.username !== username) {
     user.username = username;
     await user.save();
