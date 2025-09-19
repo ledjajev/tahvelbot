@@ -103,3 +103,24 @@ Represents a Telegram user linked to institutions and groups.
 - **Group → User**
   - `Group.hasMany(User, { foreignKey: "groupId", sourceKey: "studentGroupUuid" })`
   - `User.belongsTo(Group, { foreignKey: "groupId", targetKey: "studentGroupUuid" })`
+
+
+## **TimetableCache**
+
+Represents a cached timetable for a student group in a specific institution.
+
+| Field           | Type         | Required | Default   | Description                                      |
+|-----------------|--------------|----------|-----------|--------------------------------------------------|
+| id              | INTEGER      | ✅ Yes   | —         | Primary key.                                     |
+| schoolId        | INTEGER      | ✅ Yes   | —         | ID of the institution.                           |
+| studentGroupId  | INTEGER      | ✅ Yes   | —         | ID of the student group.                         |
+| from            | STRING       | ✅ Yes   | —         | Start date of the timetable (ISO string format). |
+| thru            | STRING       | ✅ Yes   | —         | End date of the timetable (ISO string format).   |
+| cacheData       | JSONB        | ✅ Yes   | —         | Cached timetable data in JSON format.            |
+| createdAt       | DATE         | ❌ No    | `NOW()`   | Timestamp when the cache was created.            |
+| updatedAt       | DATE         | ❌ No    | `NOW()`   | Timestamp when the cache was last updated.       |
+
+### **Additional Information**
+
+- The `TimetableCache` model is designed to store the timetable data in a cached format, helping to improve performance by avoiding redundant calculations.
+- `paranoid: true` is used for soft deletes, meaning records are not removed from the database but marked as deleted.
