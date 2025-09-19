@@ -6,6 +6,7 @@ import UserModel from "./user.js";
 import InstitutionModel from "./institution.js";
 import ClassifierModel from "./classifier.js";
 import GroupModel from "./group.js";
+import TimetableCacheModel from "./timetable_cache.js";
 
 const sequelize = new Sequelize({
     dialect: "sqlite",
@@ -17,10 +18,11 @@ const User = UserModel(sequelize);
 const Institution = InstitutionModel(sequelize);
 const Classifier = ClassifierModel(sequelize);
 const Group = GroupModel(sequelize);
+const TimetableCache = TimetableCacheModel(sequelize);
 
 Institution.hasMany(Group, { foreignKey: "InstitutionId" });
 Group.belongsTo(Institution, { foreignKey: "InstitutionId" });
 
 await sequelize.sync();
 
-export { sequelize, User, Institution, Classifier, Group };
+export { sequelize, User, Institution, Classifier, Group, TimetableCache };
