@@ -86,7 +86,7 @@ Represents a Telegram user linked to institutions and groups.
 | telegramId    | STRING   | ✅ Yes   | Unique  | Telegram user ID.                    |
 | username      | STRING   | ❌ No    | —       | Telegram username.                   |
 | institutionId | INTEGER  | ❌ No    | —       | FK → Institution(`id`).              |
-| groupId       | STRING   | ❌ No    | —       | FK → Group(`studentGroupUuid`).      |
+| groupId       | STRING   | ❌ No    | —       | Student group uuid (tahvel)          |
 
 ---
 
@@ -99,10 +99,6 @@ Represents a Telegram user linked to institutions and groups.
 - **Institution → User**
   - `Institution.hasMany(User, { foreignKey: "institutionId" })`
   - `User.belongsTo(Institution, { foreignKey: "institutionId" })`
-
-- **Group → User**
-  - `Group.hasMany(User, { foreignKey: "groupId", sourceKey: "studentGroupUuid" })`
-  - `User.belongsTo(Group, { foreignKey: "groupId", targetKey: "studentGroupUuid" })`
 
 
 ## **TimetableCache**
